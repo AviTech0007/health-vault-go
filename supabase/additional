@@ -1,0 +1,35 @@
+-- Appointments table
+CREATE TABLE appointments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  patient_id UUID REFERENCES profiles(id),
+  doctor_id UUID REFERENCES profiles(id),
+  title TEXT NOT NULL,
+  description TEXT,
+  scheduled_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  duration_minutes INTEGER DEFAULT 30,
+  status TEXT DEFAULT 'scheduled',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Notifications table
+CREATE TABLE notifications (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES profiles(id),
+  type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  message TEXT NOT NULL,
+  read BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Payment records
+CREATE TABLE payments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  appointment_id UUID REFERENCES appointments(id),
+  patient_id UUID REFERENCES profiles(id),
+  doctor_id UUID REFERENCES profiles(id),
+  amount DECIMAL(10,2) NOT NULL,
+  stripe_payment_id TEXT,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
