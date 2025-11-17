@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/c6ae386f-ebc1-4519-9ca9-9ca5f8ebf095
+**URL**: https://health-vault-go.lovable.app/
 
 ## How can I edit this code?
 
